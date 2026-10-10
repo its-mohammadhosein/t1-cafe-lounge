@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { langCodes, getLanguageConfig, type Lang } from "@/lib/i18n";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { getDictionary } from "@/lib/dictionaries";
+import { SiteHeader } from "@/components/SiteHeader";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -26,11 +27,12 @@ export default async function LangLayout({
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   const { dir } = getLanguageConfig(lang as Lang);
+  const dict = getDictionary(lang as Lang);
 
   return (
     <html lang={lang} dir={dir}>
       <body className="min-h-full flex flex-col antialiased">
-        <LanguageSwitcher currentLang={lang as Lang} />
+        <SiteHeader lang={lang as Lang} dict={dict} />
         {children}
       </body>
     </html>
