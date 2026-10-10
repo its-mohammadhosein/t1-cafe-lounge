@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true">
+  <style>
+    .bg { fill: #f3e7d6; }
+    .fg { stroke: #9c6b42; }
+    .dot { fill: #9c6b42; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #2a2420; }
+      .fg { stroke: #caa476; }
+      .dot { fill: #caa476; }
+    }
+  </style>
+  <rect class="bg" width="800" height="600" />
+  <g class="fg" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 250h160a40 40 0 0 1 40 40v40a90 90 0 0 1-90 90h-60a90 90 0 0 1-90-90v-40a40 40 0 0 1 40-40z" />
+    <path d="M500 270h20a35 35 0 0 1 0 70h-20" />
+    <path d="M330 220c0-14 10-20 10-34s-10-20-10-34" />
+    <path d="M380 220c0-14 10-20 10-34s-10-20-10-34" />
+    <path d="M430 220c0-14 10-20 10-34s-10-20-10-34" />
+  </g>
+  <circle class="dot" cx="400" cy="460" r="6" />
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
+  <style>
+    .bg-a { stop-color: #f3e7d6; }
+    .bg-b { stop-color: #e6d2b5; }
+    .fg { stroke: #9c6b42; }
+    @media (prefers-color-scheme: dark) {
+      .bg-a { stop-color: #2a2420; }
+      .bg-b { stop-color: #3a3128; }
+      .fg { stroke: #caa476; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="hero-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop class="bg-a" offset="0%" />
+      <stop class="bg-b" offset="100%" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#hero-grad)" />
+  <g class="fg" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(720,290)">
+    <path d="M0 120h260a60 60 0 0 1 60 60v50a140 140 0 0 1-140 140h-100a140 140 0 0 1-140-140v-50a60 60 0 0 1 60-60z" />
+    <path d="M320 150h30a55 55 0 0 1 0 110h-30" />
+    <path d="M50 70c0-20 15-30 15-50s-15-30-15-50" />
+    <path d="M130 70c0-20 15-30 15-50s-15-30-15-50" />
+    <path d="M210 70c0-20 15-30 15-50s-15-30-15-50" />
+  </g>
+</svg>
