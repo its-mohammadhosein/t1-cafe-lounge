@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "خانه",
+    "menu": "منو",
+    "about": "درباره ما",
+    "reserve": "رزرو میز"
+  },
+  "common": {
+    "currency": "تومان",
+    "backToMenu": "بازگشت به منو",
+    "previousItem": "آیتم قبلی",
+    "nextItem": "آیتم بعدی",
+    "reserveTable": "رزرو میز",
+    "call": "تماس بگیرید",
+    "viewMenu": "مشاهده منو",
+    "ingredients": "مواد اولیه",
+    "allergens": "حساسیت‌زاها",
+    "unavailable": "موقتاً ناموجود",
+    "switchLanguage": "English"
+  },
+  "home": {
+    "title": "به کافه لانژ تی‌وان خوش آمدید",
+    "subtitle": "جایی برای یک فنجان آرامش"
+  },
+  "menu": {
+    "title": "منو",
+    "emptyCategory": "فعلاً موردی در این دسته نیست."
+  },
+  "about": {
+    "title": "درباره ما",
+    "hoursLabel": "ساعات کاری",
+    "addressLabel": "آدرس",
+    "phoneLabel": "تلفن",
+    "mapLink": "مسیر روی نقشه"
+  },
+  "reserve": {
+    "title": "رزرو میز",
+    "whatsapp": "واتساپ",
+    "telegram": "تلگرام"
+  },
+  "redirect": {
+    "message": "در حال انتقال به سایت کافه...",
+    "fallbackLink": "اگر منتقل نشدید، اینجا کلیک کنید"
+  }
+}

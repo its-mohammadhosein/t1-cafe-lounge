@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "about": "About",
+    "reserve": "Reserve"
+  },
+  "common": {
+    "currency": "Toman",
+    "backToMenu": "Back to menu",
+    "previousItem": "Previous item",
+    "nextItem": "Next item",
+    "reserveTable": "Reserve a table",
+    "call": "Call us",
+    "viewMenu": "View menu",
+    "ingredients": "Ingredients",
+    "allergens": "Allergens",
+    "unavailable": "Currently unavailable",
+    "switchLanguage": "فارسی"
+  },
+  "home": {
+    "title": "Welcome to T1 Cafe Lounge",
+    "subtitle": "A cup of calm, every time"
+  },
+  "menu": {
+    "title": "Menu",
+    "emptyCategory": "Nothing in this category yet."
+  },
+  "about": {
+    "title": "About Us",
+    "hoursLabel": "Opening hours",
+    "addressLabel": "Address",
+    "phoneLabel": "Phone",
+    "mapLink": "Get directions"
+  },
+  "reserve": {
+    "title": "Reserve a Table",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram"
+  },
+  "redirect": {
+    "message": "Redirecting to the cafe site...",
+    "fallbackLink": "If you are not redirected, click here"
+  }
+}
