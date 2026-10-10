@@ -8,7 +8,7 @@ export function CategoryNav({ categories }: { categories: MenuCategory[] }) {
           <li key={category.id}>
             <a
               href={`#${category.slug}`}
-              className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 py-2 hover:bg-black/5 active:scale-95 focus-visible:outline focus-visible:outline-2"
+              className="pressable inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 py-2 focus-visible:outline focus-visible:outline-2"
             >
               {category.name}
             </a>

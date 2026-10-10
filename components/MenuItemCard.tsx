@@ -1,12 +1,10 @@
-import Link from "next/link";
 import type { MenuItem } from "@/lib/db";
 import type { Lang } from "@/lib/i18n";
 import { formatPrice } from "@/lib/i18n";
 import { MenuImage } from "@/components/MenuImage";
 
 const CARD_CLASS =
-  "flex min-h-11 gap-4 rounded-xl p-3 transition focus-visible:outline focus-visible:outline-2";
-const AVAILABLE_CLASS = "hover:bg-black/5 active:scale-[0.99]";
+  "flex min-h-11 gap-4 rounded-xl p-3 focus-visible:outline focus-visible:outline-2";
 const UNAVAILABLE_CLASS = "opacity-60";
 
 export function MenuItemCard({
@@ -27,6 +25,7 @@ export function MenuItemCard({
         kind="item"
         alt=""
         className="h-20 w-20 flex-none rounded-lg object-cover"
+        style={{ viewTransitionName: `item-image-${item.slug}` }}
       />
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex items-start justify-between gap-2">
@@ -60,9 +59,12 @@ export function MenuItemCard({
     );
   }
 
+  // A plain <a> (not next/link) triggers a real document navigation, which
+  // is what the browser's native View Transition between this thumbnail
+  // and the item detail's hero image needs to fire.
   return (
-    <Link href={`/${lang}/menu/${item.slug}/`} className={`${CARD_CLASS} ${AVAILABLE_CLASS}`}>
+    <a href={`/${lang}/menu/${item.slug}/`} className={`${CARD_CLASS} pressable`}>
       {content}
-    </Link>
+    </a>
   );
 }

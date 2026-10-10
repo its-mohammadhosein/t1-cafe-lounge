@@ -35,7 +35,7 @@ export default async function ReservePage({ params }: PageProps<"/[lang]/reserve
 
       <a
         href={`tel:${content.phone}`}
-        className="flex min-h-11 items-center gap-2 rounded-full bg-[var(--foreground)] px-8 py-4 text-lg font-medium text-[var(--background)] transition active:scale-95"
+        className="pressable flex min-h-11 items-center gap-2 rounded-full bg-[var(--foreground)] px-8 py-4 text-lg font-medium text-[var(--background)]"
       >
         <Phone aria-hidden size={22} />
         {dict.common.call} — {content.phone_display}
@@ -53,7 +53,7 @@ export default async function ReservePage({ params }: PageProps<"/[lang]/reserve
               href={content.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-11 items-center gap-2 rounded-full border px-4 py-2"
+              className="pressable flex min-h-11 items-center gap-2 rounded-full border px-4 py-2"
             >
               <MessageCircle aria-hidden size={18} />
               {dict.reserve.whatsapp}
@@ -64,7 +64,7 @@ export default async function ReservePage({ params }: PageProps<"/[lang]/reserve
               href={content.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-11 items-center gap-2 rounded-full border px-4 py-2"
+              className="pressable flex min-h-11 items-center gap-2 rounded-full border px-4 py-2"
             >
               <Send aria-hidden size={18} />
               {dict.reserve.telegram}

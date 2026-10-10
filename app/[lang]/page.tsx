@@ -27,7 +27,12 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <h1>{content.cafe_name}</h1>
       <p>{content.tagline}</p>
       <p>{dict.home.subtitle}</p>
-      <Link href={`/${lang}/menu/`}>{dict.common.viewMenu}</Link>
+      <Link
+        href={`/${lang}/menu/`}
+        className="pressable inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--primary)] px-6 py-3 font-medium text-[var(--primary-foreground)]"
+      >
+        {dict.common.viewMenu}
+      </Link>
     </main>
   );
 }

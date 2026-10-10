@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { getImageSrc, type ImageKind } from "@/lib/images";
 
 const DIMENSIONS: Record<ImageKind, { width: number; height: number }> = {
@@ -12,9 +13,17 @@ type MenuImageProps = {
   alt: string;
   priority?: boolean;
   className?: string;
+  style?: CSSProperties;
 };
 
-export function MenuImage({ image, kind, alt, priority = false, className }: MenuImageProps) {
+export function MenuImage({
+  image,
+  kind,
+  alt,
+  priority = false,
+  className,
+  style,
+}: MenuImageProps) {
   const src = getImageSrc(image, kind);
   const { width, height } = DIMENSIONS[kind];
 
@@ -27,7 +36,7 @@ export function MenuImage({ image, kind, alt, priority = false, className }: Men
       loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : undefined}
       className={className}
-      style={{ aspectRatio: `${width} / ${height}` }}
+      style={{ aspectRatio: `${width} / ${height}`, ...style }}
     />
   );
 }

@@ -1,8 +1,23 @@
 import type { Metadata } from "next";
+import { Vazirmatn, Inter } from "next/font/google";
 import { langCodes, getLanguageConfig, type Lang } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { SiteHeader } from "@/components/SiteHeader";
 import "../globals.css";
+
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fa",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-en",
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return langCodes.map((lang) => ({ lang }));
@@ -18,6 +33,9 @@ export async function generateMetadata({
     alternates: {
       languages: Object.fromEntries(langCodes.map((l) => [l, `/${l}/`])),
     },
+    other: {
+      "view-transition": "same-origin",
+    },
   };
 }
 
@@ -30,7 +48,7 @@ export default async function LangLayout({
   const dict = getDictionary(lang as Lang);
 
   return (
-    <html lang={lang} dir={dir}>
+    <html lang={lang} dir={dir} className={`${vazirmatn.variable} ${inter.variable}`}>
       <body className="min-h-full flex flex-col antialiased">
         <SiteHeader lang={lang as Lang} dict={dict} />
         {children}

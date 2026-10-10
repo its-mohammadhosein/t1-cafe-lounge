@@ -1,24 +1,144 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color */
+  --background: #fbf6ee;
+  --foreground: #2b2117;
+  --surface: #ffffff;
+  --surface-foreground: #2b2117;
+  --muted: #8a7a66;
+  --border: #e6d9c4;
+  --primary: #8b5e34;
+  --primary-foreground: #fff8ee;
+  --accent: #c97b3d;
+  --accent-foreground: #2b2117;
+  --danger: #b3261e;
+  --ring: #8b5e34;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows (warm-tinted, subtle) */
+  --shadow-sm: 0 1px 2px rgba(43, 33, 23, 0.06);
+  --shadow-md: 0 4px 12px rgba(43, 33, 23, 0.08);
+  --shadow-lg: 0 12px 32px rgba(43, 33, 23, 0.12);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-fast: 160ms;
+  --duration-base: 200ms;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-ring: var(--ring);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1c1712;
+    --foreground: #f3e9d8;
+    --surface: #26201a;
+    --surface-foreground: #f3e9d8;
+    --muted: #b9a98f;
+    --border: #3a2f24;
+    --primary: #d7a268;
+    --primary-foreground: #1c1712;
+    --accent: #e0935a;
+    --accent-foreground: #1c1712;
+    --danger: #e5847a;
+    --ring: #d7a268;
+
+    /* Shadows carry less weight on dark surfaces; borders do the work instead */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+html[lang="fa"] body {
+  font-family: var(--font-fa), system-ui, sans-serif;
+  line-height: 1.9;
+}
+
+html[lang="en"] body {
+  font-family: var(--font-en), system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/*
+ * Shared press/hover feedback for every tappable element (menu cards,
+ * category pills, CTAs). One definition keeps the feel consistent and
+ * means touch devices never get a hover state that sticks after a tap.
+ */
+.pressable {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pressable:hover {
+    background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+  }
+}
+
+/* Native cross-document View Transitions between menu list <-> item detail
+   and between adjacent item pages. Progressively enhances; unsupported
+   browsers just navigate normally. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*) {
+    animation-duration: var(--duration-base);
+    animation-timing-function: var(--ease-out);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
