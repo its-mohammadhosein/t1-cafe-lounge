@@ -130,7 +130,8 @@ html[lang="en"] body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
 }
 
 .pressable:active {
@@ -191,11 +192,38 @@ button:focus-visible,
   }
 }
 
+/* SiteHeader's mobile nav panel: it mounts/unmounts with the `open` state
+   (see SiteHeader.tsx), so a plain CSS animation on mount is enough — no
+   exit animation, since there's nothing to reverse once React has already
+   unmounted it. */
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-nav-panel {
+    animation: mobile-nav-in var(--duration-base) var(--ease-out) both;
+  }
+}
+
+@keyframes mobile-nav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Native cross-document View Transitions between menu list <-> item detail
    and between adjacent item pages. Progressively enhances; unsupported
    browsers just navigate normally. */
 @media (prefers-reduced-motion: no-preference) {
-  ::view-transition-group(*) {
+  /* Covers the group's move/resize *and* the old/new image crossfade with
+     the same timing — without the second rule, the crossfade quietly falls
+     back to the browser's UA-default 250ms/ease, so the move and the
+     crossfade run on two different curves during the same transition. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     animation-duration: var(--duration-base);
     animation-timing-function: var(--ease-out);
   }

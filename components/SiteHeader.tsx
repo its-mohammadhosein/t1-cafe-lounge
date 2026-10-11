@@ -70,7 +70,7 @@ export function SiteHeader({
       </div>
 
       {open && (
-        <div className="absolute inset-x-0 top-full border-t border-border bg-surface px-4 py-3 shadow-md sm:hidden">
+        <div className="mobile-nav-panel absolute inset-x-0 top-full border-t border-border bg-surface px-4 py-3 shadow-md sm:hidden">
           <nav aria-label="Main navigation" className="flex flex-col gap-1">
             {links.map((link) => {
               const isActive = pathname?.startsWith(link.href) ?? false;
