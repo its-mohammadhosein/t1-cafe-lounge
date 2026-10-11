@@ -32,8 +32,10 @@
   --duration-fast: 160ms;
   --duration-base: 200ms;
 
-  /* Layout: shared so sticky elements (CategoryNav) can offset below the header */
-  --header-height: 64px;
+  /* Layout: shared so sticky elements (CategoryNav) can offset below the header.
+     Includes the top safe-area inset so the two stay in sync on notched
+     devices once SiteHeader pads itself out for viewport-fit=cover. */
+  --header-height: calc(64px + env(safe-area-inset-top, 0px));
 }
 
 @theme inline {
@@ -85,6 +87,14 @@
   }
 }
 
+/* Mobile-native baseline: kill the tap-highlight flash (every tappable
+   element provides its own :active feedback via .pressable instead) and
+   stop iOS from inflating text size in landscape. */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -108,6 +118,15 @@ html[lang="en"] body {
 .pressable {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  /* Fires :active (and click) immediately instead of waiting out the
+     double-tap-zoom delay, and stops long-press from selecting the label
+     or popping the iOS copy/share callout. Every .pressable in this app is
+     a control (button, pill, card, nav link) — never a span of content the
+     user might want to copy, so this is always safe here. */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   transition: transform var(--duration-fast) var(--ease-out);
 }
 

@@ -27,8 +27,8 @@ export function SiteHeader({
   ];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-(--background)/90 backdrop-blur-sm">
-      <div className="mx-auto flex h-(--header-height) max-w-3xl items-center justify-between gap-3 px-4 sm:px-6">
+    <header className="sticky top-0 z-30 border-b border-border bg-(--background)/90 pt-[env(safe-area-inset-top)] backdrop-blur-sm">
+      <div className="mx-auto flex h-16 max-w-3xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link
           href={`/${lang}/`}
           className="pressable max-w-[40%] truncate rounded-lg px-1 text-lg font-semibold tracking-tight"
