@@ -4,56 +4,69 @@ import { formatPrice } from "@/lib/i18n";
 import { MenuImage } from "@/components/MenuImage";
 
 const CARD_CLASS =
-  "flex min-h-11 gap-4 rounded-xl p-3 focus-visible:outline focus-visible:outline-2";
-const UNAVAILABLE_CLASS = "opacity-60";
+  "menu-card flex gap-4 rounded-(--radius-lg) border border-border bg-surface p-3 focus-visible:outline focus-visible:outline-2 sm:p-4";
 
 export function MenuItemCard({
   item,
   lang,
   unavailableLabel,
   currencyLabel,
+  index = 0,
 }: {
   item: MenuItem;
   lang: Lang;
   unavailableLabel: string;
   currencyLabel: string;
+  index?: number;
 }) {
   const content = (
     <>
-      <MenuImage
-        image={item.image}
-        kind="item"
-        alt=""
-        className="h-20 w-20 flex-none rounded-lg object-cover"
-        style={{ viewTransitionName: `item-image-${item.slug}` }}
-      />
-      <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <div className="flex items-start justify-between gap-2">
-          <span className="font-medium">{item.name}</span>
-          <span className="whitespace-nowrap text-sm text-[var(--foreground)]/80">
-            {formatPrice(item.price, lang)} {currencyLabel}
+      <div className="relative h-24 w-24 flex-none sm:h-28 sm:w-28">
+        <MenuImage
+          image={item.image}
+          kind="item"
+          alt=""
+          className={`h-full w-full rounded-md object-cover ${
+            item.isAvailable ? "" : "opacity-70 grayscale"
+          }`}
+          style={{ viewTransitionName: `item-image-${item.slug}` }}
+        />
+        {!item.isAvailable && (
+          <span className="absolute left-1 top-1 rounded-full bg-danger px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-primary-foreground">
+            {unavailableLabel}
+          </span>
+        )}
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <div className="flex items-start justify-between gap-3">
+          <span className="font-medium leading-snug">{item.name}</span>
+          <span className="whitespace-nowrap text-sm font-semibold text-primary">
+            {formatPrice(item.price, lang)}{" "}
+            <span className="text-xs font-normal text-muted">{currencyLabel}</span>
           </span>
         </div>
-        <p className="line-clamp-2 text-sm text-[var(--foreground)]/70">{item.description}</p>
+        <p className="line-clamp-2 text-sm text-muted">{item.description}</p>
         {item.tags.length > 0 && (
-          <ul className="flex flex-wrap gap-1 text-xs">
+          <ul className="flex flex-wrap gap-1.5 pt-0.5">
             {item.tags.map((tag) => (
-              <li key={tag} className="rounded-full bg-black/5 px-2 py-0.5">
+              <li
+                key={tag}
+                className="rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 text-[11px] font-medium text-accent-foreground"
+              >
                 {tag}
               </li>
             ))}
           </ul>
         )}
-        {!item.isAvailable && (
-          <span className="text-xs text-red-600">{unavailableLabel}</span>
-        )}
       </div>
     </>
   );
 
+  const style = { animationDelay: `${Math.min(index * 40, 240)}ms` };
+
   if (!item.isAvailable) {
     return (
-      <div className={`${CARD_CLASS} ${UNAVAILABLE_CLASS}`} aria-disabled="true">
+      <div className={`${CARD_CLASS} opacity-90`} style={style} aria-disabled="true">
         {content}
       </div>
     );
@@ -63,7 +76,7 @@ export function MenuItemCard({
   // is what the browser's native View Transition between this thumbnail
   // and the item detail's hero image needs to fire.
   return (
-    <a href={`/${lang}/menu/${item.slug}/`} className={`${CARD_CLASS} pressable`}>
+    <a href={`/${lang}/menu/${item.slug}/`} className={`${CARD_CLASS} pressable`} style={style}>
       {content}
     </a>
   );

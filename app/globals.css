@@ -125,6 +125,37 @@ html[lang="en"] body {
   }
 }
 
+/* Menu item cards: resting shadow plus a lift on hover (fine pointers only,
+   so touch devices don't get a hover state that sticks after a tap), and a
+   gentle staggered entrance so a long category list doesn't just snap in. */
+.menu-card {
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu-card {
+    animation: menu-card-in var(--duration-base) var(--ease-out) both;
+  }
+}
+
+@keyframes menu-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Native cross-document View Transitions between menu list <-> item detail
    and between adjacent item pages. Progressively enhances; unsupported
    browsers just navigate normally. */
