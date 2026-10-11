@@ -103,11 +103,20 @@ html[lang="en"] body {
  * means touch devices never get a hover state that sticks after a tap.
  */
 .pressable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .pressable:active {
   transform: scale(0.97);
+}
+
+/* Smooth, continuous jump to a category instead of an instant teleport. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
