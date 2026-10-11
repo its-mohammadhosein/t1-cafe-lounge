@@ -8,6 +8,8 @@
   "common": {
     "currency": "تومان",
     "backToMenu": "بازگشت به منو",
+    "backToHome": "بازگشت به خانه",
+    "backToTop": "بازگشت به بالا",
     "previousItem": "آیتم قبلی",
     "nextItem": "آیتم بعدی",
     "reserveTable": "رزرو میز",

@@ -8,6 +8,8 @@
   "common": {
     "currency": "Toman",
     "backToMenu": "Back to menu",
+    "backToHome": "Back to home",
+    "backToTop": "Back to top",
     "previousItem": "Previous item",
     "nextItem": "Next item",
     "reserveTable": "Reserve a table",
