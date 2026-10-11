@@ -6,7 +6,10 @@
   --foreground: #2b2117;
   --surface: #ffffff;
   --surface-foreground: #2b2117;
-  --muted: #8a7a66;
+  /* #786a59, not the lighter #8a7a66 it looks like it should be: that
+     shade is only 3.86:1 against --background, under the 4.5:1 AA floor
+     for the normal-weight small text (descriptions, prices) that uses it. */
+  --muted: #786a59;
   --border: #e6d9c4;
   --primary: #8b5e34;
   --primary-foreground: #fff8ee;
@@ -132,6 +135,16 @@ html[lang="en"] body {
 
 .pressable:active {
   transform: scale(0.97);
+}
+
+/* One consistent keyboard-focus ring, on brand, instead of each browser's
+   mismatched default outline (and instead of hand-rolling it per
+   component, which left every interactive element but one unstyled). */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 /* Smooth, continuous jump to a category instead of an instant teleport. */

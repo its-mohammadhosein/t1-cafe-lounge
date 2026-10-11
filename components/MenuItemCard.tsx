@@ -4,7 +4,7 @@ import { formatPrice } from "@/lib/i18n";
 import { MenuImage } from "@/components/MenuImage";
 
 const CARD_CLASS =
-  "menu-card flex gap-4 rounded-(--radius-lg) border border-border bg-surface p-3 focus-visible:outline focus-visible:outline-2 sm:p-4";
+  "menu-card flex gap-4 rounded-(--radius-lg) border border-border bg-surface p-3 sm:p-4";
 
 export function MenuItemCard({
   item,
@@ -51,7 +51,7 @@ export function MenuItemCard({
             {item.tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 text-[11px] font-medium text-accent"
+                className="rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 text-[11px] font-medium text-foreground"
               >
                 {tag}
               </li>
