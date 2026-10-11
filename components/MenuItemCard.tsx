@@ -51,7 +51,7 @@ export function MenuItemCard({
             {item.tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 text-[11px] font-medium text-accent-foreground"
+                className="rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 text-[11px] font-medium text-accent"
               >
                 {tag}
               </li>
