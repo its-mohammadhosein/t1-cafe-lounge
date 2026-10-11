@@ -1,5 +1,12 @@
+import fs from "node:fs";
 import path from "node:path";
 import Database from "better-sqlite3";
+
+const DB_PATH = path.join(process.cwd(), "data", "cafe.db");
+
+export function getDbLastModified(): Date {
+  return fs.statSync(DB_PATH).mtime;
+}
 
 export type Lang = "fa" | "en";
 
@@ -51,8 +58,7 @@ let connection: Database.Database | null = null;
 
 function getConnection(): Database.Database {
   if (!connection) {
-    const dbPath = path.join(process.cwd(), "data", "cafe.db");
-    connection = new Database(dbPath, { readonly: true, fileMustExist: true });
+    connection = new Database(DB_PATH, { readonly: true, fileMustExist: true });
   }
   return connection;
 }

@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/about">) {
     pathWithoutLang: "/about/",
     title: `${dict.about.title} | ${content.cafe_name}`,
     description: content.about_story,
+    siteName: content.cafe_name,
   });
 }
 

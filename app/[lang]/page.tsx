@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]">) {
     pathWithoutLang: "/",
     title: content.cafe_name,
     description: content.tagline,
+    siteName: content.cafe_name,
   });
 }
 

@@ -251,14 +251,16 @@ Complete in order. After each task, run the checks listed under it and fix any f
 **Check:** view pages at mobile width in both languages; no layout shift, no clipped text, 44px touch targets, no animation violations remaining from `/review-animations`.
 
 ## Task 9: SEO, dynamic sitemap, robots, and Open Graph
-- [ ] Add `NEXT_PUBLIC_SITE_URL` (with `.env.example`) and `metadataBase`.
-- [ ] Implement `app/sitemap.ts` (`force-static`) built from the DB data layer, including `lastModified` and `hreflang` alternates.
-- [ ] Implement `app/robots.ts` (`force-static`).
-- [ ] Implement `app/[lang]/opengraph-image.tsx` with local fonts, one image per language.
-- [ ] Complete `openGraph` and `twitter` metadata for the home page and item pages.
-- [ ] Confirm `hreflang` and canonical tags on every page.
+- [x] Add `NEXT_PUBLIC_SITE_URL` (with `.env.example`) and `metadataBase`. (`lib/site.ts` throws a clear build error if unset; set your own value in `.env.local`, which is gitignored.)
+- [x] Implement `app/sitemap.ts` (`force-static`) built from the DB data layer, including `lastModified` and `hreflang` alternates.
+- [x] Implement `app/robots.ts` (`force-static`).
+- [x] Implement `app/[lang]/opengraph-image.tsx` with local fonts, one image per language. (Real Inter/Vazirmatn WOFF files committed under `assets/fonts/`, downloaded once from Google Fonts so the build itself never touches the network. The hand-made-PNG fallback in the spec was not needed — `ImageResponse` renders correctly in both directions.)
+- [x] Complete `openGraph` and `twitter` metadata for the home page and item pages. (Discovered Next does not deep-merge `openGraph` across route segments — a page that defines its own `openGraph` loses the ancestor's auto-detected image entirely, so `lib/seo.ts` now explicitly defaults every page's OG image to its language's `opengraph-image` route rather than relying on inheritance; item pages override it with their own photo when one exists.)
+- [x] Confirm `hreflang` and canonical tags on every page.
 
 **Check:** `out/sitemap.xml` and `out/robots.txt` exist. The sitemap lists every generated page and nothing that does not exist. Adding a new item to the seed data and rebuilding adds its URLs to the sitemap with no code change. `out/fa/opengraph-image` and `out/en/opengraph-image` exist (1200x630 PNG, Persian text renders correctly and in the right direction), and the home page's `og:image` tag points to them with an absolute URL.
+
+**Verified:** full `next build` (static export) succeeds; sitemap has 48 `<url>` entries (2 langs × 4 static pages + 2 langs × 20 available items) with absolute URLs and `hreflang` alternates; `robots.txt` points to the sitemap; both OG PNGs are exactly 1200×630; `og:image`/`og:title`/`og:description`/`twitter:card` confirmed present on home, menu, about, and an item page in both languages; canonical/hreflang `<link>` tags resolve to absolute URLs via `metadataBase`.
 
 ## Task 10: Accessibility and performance review
 - [ ] Verify semantic landmarks, labels, contrast, and keyboard navigation.

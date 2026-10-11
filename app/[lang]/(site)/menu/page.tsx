@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/menu">) {
     pathWithoutLang: "/menu/",
     title: `${dict.menu.title} | ${content.cafe_name}`,
     description: dict.home.subtitle,
+    siteName: content.cafe_name,
   });
 }
 

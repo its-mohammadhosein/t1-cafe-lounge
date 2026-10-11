@@ -10,7 +10,7 @@ import {
 import { getDictionary } from "@/lib/dictionaries";
 import { formatPrice, type Lang } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { getImageSrc } from "@/lib/images";
+import { getImageSrc, isPlaceholder } from "@/lib/images";
 import { MenuImage } from "@/components/MenuImage";
 import { DirectionalIcon } from "@/components/DirectionalIcon";
 
@@ -26,12 +26,17 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/menu/[slug
   if (!item) return {};
 
   const content = getContent(lang as Lang, ["cafe_name"]);
+  const hasRealPhoto = !isPlaceholder(item.image, "item");
 
   return buildMetadata({
     lang: lang as Lang,
     pathWithoutLang: `/menu/${slug}/`,
     title: `${item.name} | ${content.cafe_name}`,
     description: item.description,
+    siteName: content.cafe_name,
+    // Falls back to the language's default OG image (opengraph-image.tsx)
+    // when the item has no real photo yet.
+    image: hasRealPhoto ? getImageSrc(item.image, "item") : undefined,
   });
 }
 

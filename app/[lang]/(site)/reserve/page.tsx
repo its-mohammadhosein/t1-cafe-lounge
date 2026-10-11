@@ -13,6 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/reserve">)
     pathWithoutLang: "/reserve/",
     title: `${dict.reserve.title} | ${content.cafe_name}`,
     description: content.reserve_text,
+    siteName: content.cafe_name,
   });
 }
 
