@@ -22,6 +22,7 @@ export function LanguageSwitcher({ currentLang }: { currentLang: Lang }) {
             key={language.code}
             href={pathForLang(pathname, currentLang, language.code)}
             hrefLang={language.code}
+            className="pressable inline-flex min-h-11 items-center rounded-full border border-border bg-surface px-4 text-sm font-medium shadow-sm"
           >
             {language.label}
           </Link>

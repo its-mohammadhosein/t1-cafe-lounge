@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { getDictionary } from "@/lib/dictionaries";
 import { getMenu, getContent } from "@/lib/db";
 import { buildMetadata } from "@/lib/seo";
@@ -7,7 +5,6 @@ import type { Lang } from "@/lib/i18n";
 import { CategoryNav } from "@/components/CategoryNav";
 import { MenuItemCard } from "@/components/MenuItemCard";
 import { BackToTop } from "@/components/BackToTop";
-import { DirectionalIcon } from "@/components/DirectionalIcon";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/menu">) {
   const { lang } = await params;
@@ -29,15 +26,8 @@ export default async function MenuPage({ params }: PageProps<"/[lang]/menu">) {
   return (
     <main>
       <div className="border-b border-border bg-surface">
-        <div className="mx-auto max-w-3xl px-4 pt-6 pb-6 sm:px-6">
-          <Link
-            href={`/${lang}/`}
-            className="pressable inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm font-medium text-muted"
-          >
-            <DirectionalIcon icon={ArrowLeft} size={18} />
-            {dict.common.backToHome}
-          </Link>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight">{dict.menu.title}</h1>
+        <div className="mx-auto max-w-3xl px-4 pt-10 pb-6 sm:px-6">
+          <h1 className="text-3xl font-semibold tracking-tight">{dict.menu.title}</h1>
         </div>
       </div>
       <CategoryNav categories={categories} />

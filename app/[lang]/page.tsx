@@ -6,6 +6,7 @@ import { buildMetadata } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { MenuImage } from "@/components/MenuImage";
 import { DirectionalIcon } from "@/components/DirectionalIcon";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -35,7 +36,12 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   return (
     <main>
       <section>
-        <MenuImage image={null} kind="hero" alt="" priority className="w-full object-cover" />
+        <div className="relative">
+          <MenuImage image={null} kind="hero" alt="" priority className="w-full object-cover" />
+          <div className="absolute inset-x-0 top-0 flex justify-end p-4 sm:p-6">
+            <LanguageSwitcher currentLang={lang as Lang} />
+          </div>
+        </div>
         <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{content.cafe_name}</h1>
           <p className="mt-2 text-lg text-muted">{content.tagline}</p>

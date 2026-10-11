@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Vazirmatn, Inter } from "next/font/google";
 import { langCodes, getLanguageConfig, type Lang } from "@/lib/i18n";
-import { getDictionary } from "@/lib/dictionaries";
-import { SiteHeader } from "@/components/SiteHeader";
 import "../globals.css";
 
 const vazirmatn = Vazirmatn({
@@ -45,14 +43,10 @@ export default async function LangLayout({
 }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   const { dir } = getLanguageConfig(lang as Lang);
-  const dict = getDictionary(lang as Lang);
 
   return (
     <html lang={lang} dir={dir} className={`${vazirmatn.variable} ${inter.variable}`}>
-      <body className="min-h-full flex flex-col antialiased">
-        <SiteHeader lang={lang as Lang} dict={dict} />
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
   );
 }
