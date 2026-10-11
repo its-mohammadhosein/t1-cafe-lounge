@@ -39,8 +39,8 @@ export function MenuItemCard({
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex items-start justify-between gap-3">
-          <span className="font-medium leading-snug">{item.name}</span>
-          <span className="whitespace-nowrap text-sm font-semibold text-primary">
+          <span className="min-w-0 wrap-anywhere font-medium leading-snug">{item.name}</span>
+          <span className="flex-none whitespace-nowrap text-sm font-semibold text-primary">
             {formatPrice(item.price, lang)}{" "}
             <span className="text-xs font-normal text-muted">{currencyLabel}</span>
           </span>

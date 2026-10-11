@@ -82,8 +82,8 @@ export default async function MenuItemPage({ params }: PageProps<"/[lang]/menu/[
       />
 
       <div className="flex items-start justify-between gap-2">
-        <h1 className="text-2xl font-semibold">{item.name}</h1>
-        <span className="whitespace-nowrap text-lg">
+        <h1 className="min-w-0 wrap-anywhere text-2xl font-semibold">{item.name}</h1>
+        <span className="flex-none whitespace-nowrap text-lg">
           {formatPrice(item.price, lang as Lang)} {dict.common.currency}
         </span>
       </div>
@@ -129,9 +129,12 @@ export default async function MenuItemPage({ params }: PageProps<"/[lang]/menu/[
           images via the matching view-transition-name. */}
       <nav aria-label="Adjacent items" className="flex justify-between gap-2 border-t pt-4">
         {previous ? (
-          <a href={`/${lang}/menu/${previous.slug}/`} className="pressable flex min-h-11 items-center gap-2 rounded-full px-2">
-            <DirectionalIcon icon={ArrowLeft} />
-            <span>
+          <a
+            href={`/${lang}/menu/${previous.slug}/`}
+            className="pressable flex min-w-0 flex-1 items-center gap-2 rounded-full px-2"
+          >
+            <DirectionalIcon icon={ArrowLeft} className="flex-none" />
+            <span className="min-w-0 wrap-anywhere">
               {dict.common.previousItem}: {previous.name}
             </span>
           </a>
@@ -139,11 +142,14 @@ export default async function MenuItemPage({ params }: PageProps<"/[lang]/menu/[
           <span />
         )}
         {next ? (
-          <a href={`/${lang}/menu/${next.slug}/`} className="pressable flex min-h-11 items-center gap-2 rounded-full px-2 text-end">
-            <span>
+          <a
+            href={`/${lang}/menu/${next.slug}/`}
+            className="pressable flex min-w-0 flex-1 items-center gap-2 rounded-full px-2 text-end"
+          >
+            <span className="min-w-0 wrap-anywhere">
               {dict.common.nextItem}: {next.name}
             </span>
-            <DirectionalIcon icon={ArrowRight} />
+            <DirectionalIcon icon={ArrowRight} className="flex-none" />
           </a>
         ) : (
           <span />
