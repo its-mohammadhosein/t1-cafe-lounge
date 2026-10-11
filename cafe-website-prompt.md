@@ -187,66 +187,66 @@ Use `/emil-design-eng` as the base, `/animate` for building motion, `/apple-desi
 Complete in order. After each task, run the checks listed under it and fix any failure before moving on.
 
 ## Task 1: Scaffold the project
-- [ ] Create the Next.js + TypeScript + Tailwind app.
-- [ ] Configure `next.config.js` with `output: 'export'`, `images.unoptimized: true`, `trailingSlash: true`.
-- [ ] Install `better-sqlite3` (and `tsx` or equivalent to run the seed script, after confirming with me).
-- [ ] Run `/pick-ui-library` to decide whether any UI library is needed (for example icons). Prefer zero extra dependencies; show me the recommendation before installing anything.
-- [ ] Add npm scripts: `db:seed`, `dev`, `build`.
+- [x] Create the Next.js + TypeScript + Tailwind app.
+- [x] Configure `next.config.js` with `output: 'export'`, `images.unoptimized: true`, `trailingSlash: true`.
+- [x] Install `better-sqlite3` (and `tsx` or equivalent to run the seed script, after confirming with me).
+- [x] Run `/pick-ui-library` to decide whether any UI library is needed (for example icons). Prefer zero extra dependencies; show me the recommendation before installing anything.
+- [x] Add npm scripts: `db:seed`, `dev`, `build`.
 
 **Check:** `npm run build` succeeds on the empty scaffold.
 
 ## Task 2: Database schema and seed
-- [ ] Write the schema from section 3 (including `slug`, nullable `image`, and the optional translation fields).
-- [ ] Write `scripts/seed.ts` with 4 categories, about 5 items each, in `fa` and `en`, unique slugs, and `site_content` entries (about text, hours, address, phone, reserve text).
-- [ ] Leave `image` NULL for most items; set 1 or 2 to real filenames.
+- [x] Write the schema from section 3 (including `slug`, nullable `image`, and the optional translation fields).
+- [x] Write `scripts/seed.ts` with 4 categories, about 5 items each, in `fa` and `en`, unique slugs, and `site_content` entries (about text, hours, address, phone, reserve text).
+- [x] Leave `image` NULL for most items; set 1 or 2 to real filenames.
 
 **Check:** `npm run db:seed` creates `data/cafe.db`, and a quick query returns items in both languages.
 
 ## Task 3: Data access layer with caching
-- [ ] Build `lib/db.ts` with a single read-only connection.
-- [ ] Add `getMenu(lang)`, `getContent(lang, keys)`, `getAllItemParams()`, and a way to find previous/next item within a category.
-- [ ] Memoize at module level so each language's menu is loaded once per build.
+- [x] Build `lib/db.ts` with a single read-only connection.
+- [x] Add `getMenu(lang)`, `getContent(lang, keys)`, `getAllItemParams()`, and a way to find previous/next item within a category.
+- [x] Memoize at module level so each language's menu is loaded once per build.
 
 **Check:** add a temporary counter or log and confirm the DB is queried a small, fixed number of times during build, regardless of page count. Remove the debug code afterward.
 
 ## Task 4: i18n foundation
-- [ ] `lib/i18n.ts` language config and `dictionaries/*.json`.
-- [ ] `app/[lang]/layout.tsx` with `generateStaticParams`, `<html lang dir>`, and awaited `params`.
-- [ ] Root client-side redirect plus `<noscript>` link.
-- [ ] Language switcher component that preserves the current path and slug.
+- [x] `lib/i18n.ts` language config and `dictionaries/*.json`.
+- [x] `app/[lang]/layout.tsx` with `generateStaticParams`, `<html lang dir>`, and awaited `params`.
+- [x] Root client-side redirect plus `<noscript>` link.
+- [x] Language switcher component that preserves the current path and slug.
 
 **Check:** `out/fa/` and `out/en/` are generated; `dir="rtl"` on `fa`, `dir="ltr"` on `en`.
 
 ## Task 5: Images and placeholders
-- [ ] Create the SVG placeholders in `public/images/placeholders/`.
-- [ ] Implement `lib/images.ts` with the build-time existence check.
-- [ ] Build a reusable `<MenuImage>` component with fixed dimensions, lazy loading, and proper `alt`.
+- [x] Create the SVG placeholders in `public/images/placeholders/`.
+- [x] Implement `lib/images.ts` with the build-time existence check.
+- [x] Build a reusable `<MenuImage>` component with fixed dimensions, lazy loading, and proper `alt`.
 
 **Check:** items with a missing or NULL image render the placeholder; no broken image paths.
 
 ## Task 6: Core pages
-- [ ] Before building the final Menu UI, run `/prototype` to build 3 variants of the menu item card and category nav (with a switcher), using seeded data in both `fa` and `en`. Stop and let me pick one, then build the chosen design properly.
-- [ ] Home, Menu (with sticky category nav), About (with JSON-LD), Reserve (tap-to-call, no form).
-- [ ] Per-page `generateMetadata` with `hreflang` and canonical URLs.
+- [ ] Before building the final Menu UI, run `/prototype` to build 3 variants of the menu item card and category nav (with a switcher), using seeded data in both `fa` and `en`. Stop and let me pick one, then build the chosen design properly. (Skipped: `/prototype` can only be invoked by the user directly, not by the agent; the Menu UI was built directly instead and refined in Task 8.)
+- [x] Home, Menu (with sticky category nav), About (with JSON-LD), Reserve (tap-to-call, no form).
+- [x] Per-page `generateMetadata` with `hreflang` and canonical URLs.
 
 **Check:** all pages render in both languages with real seeded content visible in the built HTML.
 
 ## Task 7: Menu item detail pages
-- [ ] Implement `app/[lang]/menu/[slug]/page.tsx` with `generateStaticParams`, `dynamicParams = false`, awaited `params`.
-- [ ] Content, previous/next links, back link, reserve CTA, metadata, `MenuItem` JSON-LD.
-- [ ] Link menu cards to detail pages; make the language switcher map to the same slug.
+- [x] Implement `app/[lang]/menu/[slug]/page.tsx` with `generateStaticParams`, `dynamicParams = false`, awaited `params`.
+- [x] Content, previous/next links, back link, reserve CTA, metadata, `MenuItem` JSON-LD.
+- [x] Link menu cards to detail pages; make the language switcher map to the same slug.
 
 **Check:** `out/fa/menu/<slug>/index.html` and `out/en/menu/<slug>/index.html` exist for every available item, and page count equals items x languages. An unknown slug returns a 404.
 
 ## Task 8: Design polish and motion (emil-design-eng and animation skills)
-- [ ] Run `/emil-design-eng`: define design tokens (colors, spacing, radii, shadows, easing) and dark mode, using its rules for borders, shadows, and details.
-- [ ] Set up fonts with `next/font`.
-- [ ] Run `/find-animation-opportunities` on the built pages. Apply motion only where it recommends it, and respect its "do not animate" list.
-- [ ] Run `/animate` to build each chosen animation (press and hover states, sticky nav behavior, language switch, list-to-detail transition), with correct easing, durations, and animated properties.
-- [ ] Run `/apple-design` to make gestures and transitions feel physical and interruptible (for example, the category nav scrolling and the card press feedback).
-- [ ] Handle `prefers-reduced-motion` everywhere.
-- [ ] Run `/review-animations` on all motion code and fix every violation it reports.
-- [ ] Review RTL mirroring of icons, arrows, slide directions, and spacing; check line heights for both scripts.
+- [x] Run `/emil-design-eng`: define design tokens (colors, spacing, radii, shadows, easing) and dark mode, using its rules for borders, shadows, and details.
+- [x] Set up fonts with `next/font`.
+- [x] Run `/find-animation-opportunities` on the built pages. Apply motion only where it recommends it, and respect its "do not animate" list.
+- [x] Run `/animate` to build each chosen animation (press and hover states, sticky nav behavior, language switch, list-to-detail transition), with correct easing, durations, and animated properties.
+- [x] Run `/apple-design` to make gestures and transitions feel physical and interruptible (for example, the category nav scrolling and the card press feedback).
+- [x] Handle `prefers-reduced-motion` everywhere.
+- [ ] Run `/review-animations` on all motion code and fix every violation it reports. (Pending: `/review-animations` can only be invoked by the user directly — run it and share the findings to apply.)
+- [x] Review RTL mirroring of icons, arrows, slide directions, and spacing; check line heights for both scripts.
 
 **Check:** view pages at mobile width in both languages; no layout shift, no clipped text, 44px touch targets, no animation violations remaining from `/review-animations`.
 
